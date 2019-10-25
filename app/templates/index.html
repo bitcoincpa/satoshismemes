@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Satoshis.Memes</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+    <style>
+    #grad1 {
+    height: 250px;
+    width: 100%;
+    background-color: #1fc8db;
+    background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 25%, #2cb5e8 100%);
+    color: black;
+    opacity: 0.95;
+
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+          font-color white;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+</head>
+<body class="text-center p-3 mb-2 bg-light text-light">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="grad1">
+    <header class="masthead mb-auto">
+
+    </header>
+    <div class="container">
+         <div class="row">
+              <div class="col-8">
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Satoshi's Memes</h1>
+        <br/>
+        <br/>
+
+        <p class="lead">Complete the fields below and generate your meme.</p>
+        <p class="lead">
+
+
+        <form class="container w-50" id="uploadform" action = "/" method ="POST" enctype="multipart/form-data">
+            <div class="custom-file">
+
+                <input oninput ="filesize(this);" type="file" class="custom-file-input" id="image" name ="file" accept="image/*">
+                <label class="custom-file-label" for="image">Choose Image</label>
+                <br/>
+                <br/>
+                <textarea class="form-control form-control-lg" type="text" placeholder="Insert caption here" name = "caption"></textarea>
+                <br/>
+                <input class="form-control form-control-sm" type="text" placeholder="@WatermarkTag" name = "tag">
+                </br>
+
+                <table class="table">
+
+                    <label> Watermark Location</label>
+                    <tr>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="topbottom" id="top" value="1" checked>
+                            <label class="form-check-label" for="top">
+                                Top
+                            </label>
+                        </div>
+                    </td>
+
+                    <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="topbottom" id="bottom" value="0">
+                        <label class="form-check-label" for="bottom">
+                            Bottom
+                        </label>
+                    </div>
+                    </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="leftright" id="left" value="100" checked>
+                        <label class="form-check-label" for="left">
+                            Left
+                        </label>
+                    </div>
+                        </td>
+
+                    <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="leftright" id="right" value="900" >
+                        <label class="form-check-label" for="right">
+                            Right
+                        </label>
+                    </div>
+                    </td>
+
+
+                    </tr>
+                </table>
+
+
+
+
+
+
+                <label for="customRange3">Font Size</label>
+
+                <input type="range" class="custom-range" min="1" max="16" step="1" id="customRange3" name="fontsize">
+            </div>
+
+
+            <input type="submit" id="submit" class="btn btn-lg btn-primary green" value="Generate Meme"></input>
+
+        <!-- <p>Result Filename:&nbsp;<span id="resultFilename"> here</span></p>
+            <p>Result Filesize:&nbsp;<span id="resultFilesize">here</span></p>
+            <p>Result Filename:&nbsp;<span id="resultCaption"> here</span></p>
+        <p>Result Filesize:&nbsp;<span id="resultTag">here</span></p> -->
+    </div>
+        <div class="col-4">
+        <br/><br/><br/><br/><br/><br/>
+        <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC' id="meme" width="300"/>
+        </div>
+
+        </form>
+
+        </p>
+
+    </div></div>
+    </main>
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <hr/>
+            <p>Copyright <a href="#">MemeGenerator</a></p>
+        </div>
+
+
+    </footer>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="{{url_for('js_static', filename='app.js')}}"></script>
+
+
+{% block script %}
+
+<script>
+
+  function filesize(elem){
+    document.cookie = `filesize=${elem.files[0].size}`;
+  }
+
+</script>
+
+{% endblock %}
+
+
+
+</body>
+</html>
