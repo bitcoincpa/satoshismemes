@@ -1,4 +1,4 @@
 from app import app
 
-app = app()
+app1 = app()
 
