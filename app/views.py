@@ -16,21 +16,6 @@ from werkzeug.utils import secure_filename
 from PIL import Image, ImageDraw, ImageFont
 from app.image_utils import ImageText
 
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app)
-#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////Users/davemagarian/pycharmprojects/meme-flask/memes.db"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///memes.db"
-
-
-class FileContents(db.Model):
-    id= db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(300))
-    data = db.Column(db.LargeBinary)
-    image_file = db.Column(db.String(50), nullable= False)
-
-    def __repr__(self):
-        return f"Image('{self.image_file}')"
-
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 from logging import Formatter, FileHandler
@@ -127,10 +112,6 @@ def upldfile():
 
             app.logger.info('FileName: ' + filename)
             print('FileName: ' + filename)
-
-            """newfile = FileContents(name=filename, data=files.read())
-            db.session.add(newfile)
-            db.session.commit()"""
 
             updir = app.config["IMAGE_UPLOADS"]
             files.save(os.path.join(updir, filename))
