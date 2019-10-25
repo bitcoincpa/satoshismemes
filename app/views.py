@@ -81,7 +81,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
-@app.context_processor
+"""@app.context_processor
 def override_url_for():
     return dict(url_for=dated_url_for)
 
@@ -99,7 +99,7 @@ def dated_url_for(endpoint, **values):
                                      'static/css', filename)
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
-
+"""
 """@app.route('/css/<path:filename>')
 def css_static(filename):
     return send_from_directory(app.root_path + '/static/css/', filename)"""
