@@ -1,7 +1,5 @@
 from app import app
 
-import base64
-import io
 
 from flask import (
     request,
