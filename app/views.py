@@ -22,10 +22,10 @@ handler.setFormatter(
 )
 app.logger.addHandler(handler)
 
-app.config["IMAGE_UPLOADS"] ="/Users/davemagarian/pycharmprojects/meme-flask/app/static/upload"
+app.config["IMAGE_UPLOADS"] ="app/static/upload"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = .5 * 4024 * 4024
-app.config["MEME_GENERATED"] ="/Users/davemagarian/pycharmprojects/meme-flask/app/static/memes"
+app.config["MEME_GENERATED"] ="app/static/memes"
 app.config["MEME_FONT"] = "/static/Helvetica.ttc"
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'JPEG', 'GIF'])
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ABC')
