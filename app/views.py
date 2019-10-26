@@ -33,7 +33,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ABC')
 
 @app.route('/index', methods=["GET", "POST"])
 @app.route('/', methods=["GET", "POST"])
-def home(a,b):
+def home():
     return render_template('index.html')
 
 def allowed_image(filename):
