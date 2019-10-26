@@ -30,7 +30,7 @@ app.config["MAX_IMAGE_FILESIZE"] = .5 * 4024 * 4024
 app.config["MEME_GENERATED"] ="/Users/davemagarian/pycharmprojects/meme-flask/app/static/memes"
 app.config["MEME_FONT"] = "/static/Helvetica.ttc"
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'JPEG', 'GIF'])
-
+app.confif['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ABC')
 
 
 @app.route('/index', methods=["GET", "POST"])
