@@ -61,7 +61,7 @@ def allowed_image_filesize(filesize):
         return False
 
 def resize_image(img):
-    basewidth = 300
+    basewidth = 100
     wpercent = (basewidth / float(img.size[0]))
     hsize = int((float(img.size[1]) * float(wpercent)))
     return img.resize((basewidth, hsize), Image.ANTIALIAS)
@@ -103,8 +103,6 @@ def js_static(filename):
 def upldfile():
     if request.method == 'POST':
         files = request.files['file']
-
-
         req = request.form
         caption = req["caption"]
         tag = req["tag"]
