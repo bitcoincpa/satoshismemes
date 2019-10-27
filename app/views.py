@@ -35,7 +35,7 @@ app.config["IMAGE_UPLOADS"] ="app/static/upload"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = .5 * 4024 * 4024
 app.config["MEME_GENERATED"] ="app/static/memes"
-app.config["MEME_FONT"] = "/static/Helvetica.ttc"
+app.config["MEME_FONT"] = "app/static/Helvetica.ttc"
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'JPEG', 'GIF'])
 """app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ABC')"""
 
@@ -197,7 +197,7 @@ def upldfile():
         #fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
         #combined.save(fullfilename)
         #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
-        return jsonify(name=files, byte=x, caption = caption, tag = tag)
+        return jsonify(byte=x)
 
 """"@app.after_request
 def add_header(r):
