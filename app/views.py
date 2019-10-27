@@ -61,7 +61,7 @@ def allowed_image_filesize(filesize):
         return False
 
 def resize_image(img):
-    basewidth = 1200
+    basewidth = 300
     wpercent = (basewidth / float(img.size[0]))
     hsize = int((float(img.size[1]) * float(wpercent)))
     return img.resize((basewidth, hsize), Image.ANTIALIAS)
