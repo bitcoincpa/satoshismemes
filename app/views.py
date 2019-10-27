@@ -197,7 +197,7 @@ def upldfile():
         #fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
         #combined.save(fullfilename)
         #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
-        return jsonify(name=filename, byte=x, caption = caption, tag = tag)
+        return jsonify(name=files, byte=x, caption = caption, tag = tag)
 
 """"@app.after_request
 def add_header(r):
