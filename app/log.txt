@@ -1689,3 +1689,22 @@ Traceback (most recent call last):
   File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py", line 179, in default
     raise TypeError(f'Object of type {o.__class__.__name__} '
 TypeError: Object of type Image is not JSON serializable
+[2019-10-27 12:37:00] ERROR    Exception on /uploadajax [POST]
+Traceback (most recent call last):
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/app/views.py", line 140, in upldfile
+    meme = Image.open(file_stream)
+  File "/Users/davemagarian/PycharmProjects/Meme-Flask/venv/lib/python3.7/site-packages/PIL/Image.py", line 2818, in open
+    raise IOError("cannot identify image file %r" % (filename if filename else fp))
+OSError: cannot identify image file <_io.BytesIO object at 0x117c70af0>

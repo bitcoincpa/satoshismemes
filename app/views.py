@@ -99,7 +99,7 @@ def css_static(filename):
 def js_static(filename):
     return send_from_directory(app.root_path + '/static/js/', filename)
 
-@app.route('/uploadajax', methods=['POST','GET'])
+@app.route('/uploadajax', methods=['POST'])
 def upldfile():
     if request.method == 'POST':
         files = request.files['file']
@@ -111,93 +111,93 @@ def upldfile():
         leftright = req["leftright"]
         print(files)
         print(topbottom)
-        if files and allowed_file(files.filename):
-            filename = secure_filename(files.filename)
+        #if files and allowed_file(files.filename):
+        filename = secure_filename(files.filename)
 
-            app.logger.info('FileName: ' + filename)
-            print('FileName: ' + filename)
-            """s3_resource = boto3.resource('s3')
-            my_bucket = s3_resource.Bucket('satoshismemes')
-            my_bucket.Object(filename).put(Body=filename)
+        app.logger.info('FileName: ' + filename)
+        print('FileName: ' + filename)
+        """s3_resource = boto3.resource('s3')
+        my_bucket = s3_resource.Bucket('satoshismemes')
+        my_bucket.Object(filename).put(Body=filename)
 """
 
-            #newObject = my_bucket.Object(filename)
-            file_stream = io.BytesIO(files.read())
-            #files.download_fileobj(file_stream)
+        #newObject = my_bucket.Object(filename)
+        file_stream = io.BytesIO(files.read())
+        #files.download_fileobj(file_stream)
 
 
 
 
 
-            """updir = app.config["IMAGE_UPLOADS"]
-            files.save(os.path.join(updir, filename))
-            file_size = os.path.getsize(os.path.join(updir, filename))
-            file_path = '/'.join(['upload', filename])
-            memefile_path = '/'.join(['memes', filename +'.png'])"""
+        """updir = app.config["IMAGE_UPLOADS"]
+        files.save(os.path.join(updir, filename))
+        file_size = os.path.getsize(os.path.join(updir, filename))
+        file_path = '/'.join(['upload', filename])
+        memefile_path = '/'.join(['memes', filename +'.png'])"""
 
 
 
-            meme = Image.open(file_stream)
+        meme = Image.open(file_stream)
 
 
 
 
-            """meme = Image.open(os.path.join(app.config["IMAGE_UPLOADS"], filename))"""
+        """meme = Image.open(os.path.join(app.config["IMAGE_UPLOADS"], filename))"""
 
-            resizedMeme = resize_image(meme)
+        resizedMeme = resize_image(meme)
 
 
-            width, height = resizedMeme.size
-            #print(width, height)
+        width, height = resizedMeme.size
+        #print(width, height)
 
-            # Create white canvas
-            meme = ImageText((width + 80, height + (height // 3) + 80), background=(255, 255, 255))  # 200 = alpha
+        # Create white canvas
+        meme = ImageText((width + 80, height + (height // 3) + 80), background=(255, 255, 255))  # 200 = alpha
 
-            bi = Image.new('RGBA', (width + 80, height + (height // 3) + 80), 'white')
+        bi = Image.new('RGBA', (width + 80, height + (height // 3) + 80), 'white')
 
-            # write caption
-            meme.write_text_box((40, -30), caption, box_width=width, font_filename=app.config["MEME_FONT"],
-                                font_size=height // int(fontsize), color='black')
+        # write caption
+        meme.write_text_box((40, -30), caption, box_width=width, font_filename=app.config["MEME_FONT"],
+                            font_size=height // int(fontsize), color='black')
 
-            # w,h = meme.get_text_size(font,height//12,caption)
+        # w,h = meme.get_text_size(font,height//12,caption)
 
-            img2 = meme.get_image()
+        img2 = meme.get_image()
 
-            bi.paste(img2, (0, 0))
-            bi.paste(resizedMeme, (40, round(height // 3) + 40))
+        bi.paste(img2, (0, 0))
+        bi.paste(resizedMeme, (40, round(height // 3) + 40))
 
-            tagfont = ImageFont.truetype(app.config["MEME_FONT"], int(height / 20))
-            txt = Image.new('RGBA', bi.size, (255, 255, 255, 0))
-            draw = ImageDraw.Draw(txt)
-            #print(bi.size)
-            wx, wy = bi.size
-            x = int(leftright)
-            y = (wy - 100) - height*int(topbottom) + 100*int(topbottom)
+        tagfont = ImageFont.truetype(app.config["MEME_FONT"], int(height / 20))
+        txt = Image.new('RGBA', bi.size, (255, 255, 255, 0))
+        draw = ImageDraw.Draw(txt)
+        #print(bi.size)
+        wx, wy = bi.size
+        x = int(leftright)
+        y = (wy - 100) - height*int(topbottom) + 100*int(topbottom)
 
-            #y = ((height)+(height // 3) - 40)
-            #print(y)
-            #y = (int(height) / int(topbottom)) + 50
-            draw.text((x, y), tag, fill=(255, 255, 255, 90), font=tagfont)
+        #y = ((height)+(height // 3) - 40)
+        #print(y)
+        #y = (int(height) / int(topbottom)) + 50
+        draw.text((x, y), tag, fill=(255, 255, 255, 90), font=tagfont)
 
-            combined = Image.alpha_composite(bi, txt)
+        combined = Image.alpha_composite(bi, txt)
 
-            saved_meme = io.BytesIO()
-            combined.save(saved_meme, 'png')
-            imgByteArr = saved_meme.getvalue()
-            #combined.show()
-            #print(type(imgByteArr))
-            x =base64.b64encode(imgByteArr).decode('utf8')
-            #print(type(x))
+        saved_meme = io.BytesIO()
+        combined.save(saved_meme, 'png')
+        imgByteArr = saved_meme.getvalue()
+        #combined.show()
+        #print(type(imgByteArr))
+        x =base64.b64encode(imgByteArr).decode('utf8')
+        #print(type(x))
 
-            """s3_resource = boto3.resource('s3')
-            my_bucket = s3_resource.Bucket('satoshismemes')
-            newfilename = filename + '.png'
-            my_bucket.Object(newfilename).put(Body=imgByteArr)"""
+        """s3_resource = boto3.resource('s3')
+        my_bucket = s3_resource.Bucket('satoshismemes')
+        newfilename = filename + '.png'
+        my_bucket.Object(newfilename).put(Body=imgByteArr)"""
 
-            #fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
-            #combined.save(fullfilename)
-            #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
-            return jsonify(name=filename, byte=x, caption = caption, tag = tag)
+        #fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
+        #combined.save(fullfilename)
+        #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
+        return jsonify(name=filename, byte=x, caption = caption, tag = tag)
 
 """"@app.after_request
 def add_header(r):
