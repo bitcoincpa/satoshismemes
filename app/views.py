@@ -99,7 +99,7 @@ def css_static(filename):
 def js_static(filename):
     return send_from_directory(app.root_path + '/static/js/', filename)
 
-@app.route('/uploadajax', methods=['POST'])
+@app.route('/uploadajax', methods=['POST','GET'])
 def upldfile():
     if request.method == 'POST':
         files = request.files['file']
@@ -197,17 +197,15 @@ def upldfile():
             #fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
             #combined.save(fullfilename)
             #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
-            return jsonify(byte=x)
+            return jsonify(name=filename, byte=x, caption = caption, tag = tag)
 
-@app.after_request
+""""@app.after_request
 def add_header(r):
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
+
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     r.headers["Pragma"] = "no-cache"
     r.headers["Expires"] = "0"
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
 
+"""
