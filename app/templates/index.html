@@ -25,22 +25,14 @@
     color: black;
     opacity: 0.95;
 
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-          font-color white;
-        }
-      }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <!-- Custom styles for this template
+    <link href="cover.css" rel="stylesheet">-->
 </head>
-<body class="text-center p-3 mb-2 bg-light text-light">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="grad1">
-    <header class="masthead mb-auto">
 
-    </header>
+<body class="text-center p-3 mb-2 bg-light text-light">
+<div class="cover-container d-flex w-200 h-100 p-3 mx-auto flex-column" id="grad1">
+
     <div class="container">
          <div class="row">
               <div class="col">
@@ -53,7 +45,7 @@
         <p class="lead">
 
 
-        <form class="container w-50" id="uploadform" action = "/" method ="POST" enctype="multipart/form-data">
+        <form class="container w-100" id="uploadform" action = "/" method ="POST" enctype="multipart/form-data">
             <div class="custom-file">
 
                 <input oninput ="filesize(this);" type="file" class="custom-file-input" id="image" name ="file" accept="image/*">
