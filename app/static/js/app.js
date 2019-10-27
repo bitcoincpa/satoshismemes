@@ -20,10 +20,11 @@ $('#submit').click(function() {
         //my_url = "{{ url_for('upload', filename="+data['name']+" }}";
         $("#img").attr('src', '/static/'+data['path']);
         $("#meme").attr('src', '/static/'+data['meme']);
-
+        $('#ItemPreview').attr('src', 'data:image/png;base64,' + data['byte']);
         //$("#image").attr('src', data['path']); // setting the src attribute of img tag
         $("#adv-btn").attr('value', data['name']);
         $("#adv-btn").show();
+
         //get_image(data['name'])
     }).fail(function(data){
         alert('Choose a valid image file.');

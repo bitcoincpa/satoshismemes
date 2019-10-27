@@ -1,4 +1,9 @@
 from app import app
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+import io
+import base64
 
 
 from flask import (
@@ -13,6 +18,10 @@ from werkzeug.utils import secure_filename
 from PIL import Image, ImageDraw, ImageFont
 from app.image_utils import ImageText
 
+import boto3
+from config import S3_BUCKET, S3_KEY, S3_SECRET
+
+s3 = boto3.client('s3', aws_access_key_id='AKIASDAIHF3AEIH6RTCF', aws_secret_access_key='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')
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 from logging import Formatter, FileHandler
@@ -28,7 +37,7 @@ app.config["MAX_IMAGE_FILESIZE"] = .5 * 4024 * 4024
 app.config["MEME_GENERATED"] ="app/static/memes"
 app.config["MEME_FONT"] = "/static/Helvetica.ttc"
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'JPEG', 'GIF'])
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ABC')
+"""app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ABC')"""
 
 
 @app.route('/index', methods=["GET", "POST"])
@@ -109,23 +118,36 @@ def upldfile():
 
             app.logger.info('FileName: ' + filename)
             print('FileName: ' + filename)
+            """s3_resource = boto3.resource('s3')
+            my_bucket = s3_resource.Bucket('satoshismemes')
+            my_bucket.Object(filename).put(Body=filename)
+"""
 
-            updir = app.config["IMAGE_UPLOADS"]
+            #newObject = my_bucket.Object(filename)
+            file_stream = io.BytesIO(files.read())
+            #files.download_fileobj(file_stream)
+
+
+
+
+
+            """updir = app.config["IMAGE_UPLOADS"]
             files.save(os.path.join(updir, filename))
             file_size = os.path.getsize(os.path.join(updir, filename))
             file_path = '/'.join(['upload', filename])
-            memefile_path = '/'.join(['memes', filename +'.png'])
+            memefile_path = '/'.join(['memes', filename +'.png'])"""
 
 
 
-            #meme = Image.open(x)
+            meme = Image.open(file_stream)
 
 
 
 
-            meme = Image.open(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            """meme = Image.open(os.path.join(app.config["IMAGE_UPLOADS"], filename))"""
 
             resizedMeme = resize_image(meme)
+
 
             width, height = resizedMeme.size
             print(width, height)
@@ -161,27 +183,23 @@ def upldfile():
 
             combined = Image.alpha_composite(bi, txt)
 
+            saved_meme = io.BytesIO()
+            combined.save(saved_meme, 'png')
+            imgByteArr = saved_meme.getvalue()
             #combined.show()
+            print(type(imgByteArr))
+            x =base64.b64encode(imgByteArr).decode('utf8')
+            print(type(x))
+
+            """s3_resource = boto3.resource('s3')
+            my_bucket = s3_resource.Bucket('satoshismemes')
             newfilename = filename + '.png'
+            my_bucket.Object(newfilename).put(Body=imgByteArr)"""
 
-            fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
-            combined.save(fullfilename)
-
-            """buffered = BytesIO()
-            combined.save(buffered, format="PNG")
-            img_str = base64.b64encode(buffered.getvalue())
-            img_base64 = bytes("data:image/png;base64,", encoding='utf-8') + img_str
-
-            finalmeme = FileContents(name=img_base64, data=img_base64)
-            db.session.add(finalmeme)
-            db.session.commit()"""
-
-            return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
-
-"""@app.route('/download')
-def download():
-    file_data = FileContents.query.filter_by(id=1).first()
-    return send_file(BytesIO(file_data.data), attachment_filename = "", as_attachment = True)"""
+            #fullfilename = os.path.join(app.config["MEME_GENERATED"], newfilename)
+            #combined.save(fullfilename)
+            #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
+            return jsonify(byte=x)
 
 @app.after_request
 def add_header(r):
