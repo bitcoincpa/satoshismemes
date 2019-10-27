@@ -30,110 +30,102 @@
     <link href="cover.css" rel="stylesheet">-->
 </head>
 
+
 <body class="text-center p-3 mb-2 bg-light text-light">
 <div class="cover-container d-flex w-200 h-100 p-3 mx-auto flex-column" id="grad1">
-
     <div class="container">
-         <div class="row">
-             <div class="col">
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Satoshi's Memes</h1>
+            <br/>
+            <img src='' id="ItemPreview" width="300"/>
+            <br/>
 
-                 <br/>
-        <img src='' id="ItemPreview" width="300"/>
-             <br/>
-        </div>
-              <div class="col">
-    <main role="main" class="inner cover">
-        <h1 class="cover-heading">Satoshi's Memes</h1>
-        <br/>
-        <br/>
-
-        <p class="lead">Complete the fields below and generate your meme.</p>
-        <p class="lead">
+            <p class="lead">Complete the fields below and generate your meme.</p>
+            <p class="lead">
 
 
-        <form class="container w-100" id="uploadform" action = "/" method ="POST" enctype="multipart/form-data">
-            <div class="custom-file">
+            <form class="container w-75" id="uploadform" action = "/" method ="POST" enctype="multipart/form-data">
+                <div class="custom-file">
 
-                <input oninput ="filesize(this);" type="file" class="custom-file-input" id="image" name ="file" accept="image/*">
-                <label class="custom-file-label" for="image">Choose Image</label>
-                <br/>
-                <br/>
-                <textarea class="form-control form-control-lg" type="text" placeholder="Insert caption here" name = "caption"></textarea>
-                <br/>
-                <input class="form-control form-control-sm" type="text" placeholder="@WatermarkTag" name = "tag">
-                </br>
+                    <input oninput ="filesize(this);" type="file" class="custom-file-input" id="image" name ="file" accept="image/*">
+                    <label class="custom-file-label" for="image">Choose Image</label>
+                    <br/>
+                    <br/>
+                    <textarea class="form-control form-control-lg" type="text" placeholder="Insert caption here" name = "caption"></textarea>
+                    <br/>
+                    <input class="form-control form-control-sm" type="text" placeholder="@WatermarkTag" name = "tag">
+                    </br>
 
-                <table class="table">
+                    <table class="table">
 
-                    <label> Watermark Location</label>
-                    <tr>
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="topbottom" id="top" value="1" checked>
-                            <label class="form-check-label" for="top">
-                                Top
-                            </label>
-                        </div>
-                    </td>
+                        <label> Watermark Location</label>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="topbottom" id="top" value="1" checked>
+                                    <label class="form-check-label" for="top">
+                                        Top
+                                    </label>
+                                </div>
+                            </td>
 
-                    <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="topbottom" id="bottom" value="0">
-                        <label class="form-check-label" for="bottom">
-                            Bottom
-                        </label>
-                    </div>
-                    </td>
-                    </tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="topbottom" id="bottom" value="0">
+                                    <label class="form-check-label" for="bottom">
+                                        Bottom
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="leftright" id="left" value="100" checked>
-                        <label class="form-check-label" for="left">
-                            Left
-                        </label>
-                    </div>
-                        </td>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="leftright" id="left" value="100" checked>
+                                    <label class="form-check-label" for="left">
+                                        Left
+                                    </label>
+                                </div>
+                            </td>
 
-                    <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="leftright" id="right" value="900" >
-                        <label class="form-check-label" for="right">
-                            Right
-                        </label>
-                    </div>
-                    </td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="leftright" id="right" value="900" >
+                                    <label class="form-check-label" for="right">
+                                        Right
+                                    </label>
+                                </div>
+                            </td>
 
 
-                    </tr>
-                </table>
+                        </tr>
+                    </table>
 
 
 
 
 
 
-                <label for="customRange3">Font Size</label>
+                    <label for="customRange3">Font Size</label>
 
-                <input type="range" class="custom-range" min="1" max="16" step="1" id="customRange3" name="fontsize">
-            </div>
+                    <input type="range" class="custom-range" min="1" max="16" step="1" id="customRange3" name="fontsize">
+                </div>
 
 
-            <input type="submit" id="submit" class="btn btn-lg btn-primary green" value="Generate Meme"></input>
+                <input type="submit" id="submit" class="btn btn-lg btn-primary green" value="Generate Meme"></input>
 
-        <!-- <p>Result Filename:&nbsp;<span id="resultFilename"> here</span></p>
-            <p>Result Filesize:&nbsp;<span id="resultFilesize">here</span></p>
-            <p>Result Filename:&nbsp;<span id="resultCaption"> here</span></p>
-        <p>Result Filesize:&nbsp;<span id="resultTag">here</span></p> -->
+                <!-- <p>Result Filename:&nbsp;<span id="resultFilename"> here</span></p>
+                    <p>Result Filesize:&nbsp;<span id="resultFilesize">here</span></p>
+                    <p>Result Filename:&nbsp;<span id="resultCaption"> here</span></p>
+                <p>Result Filesize:&nbsp;<span id="resultTag">here</span></p> -->
+
+            </form>
+
+            </p>
+        </main>
     </div>
 
-        </form>
-
-        </p>
-
-    </div></div>
-    </main>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
