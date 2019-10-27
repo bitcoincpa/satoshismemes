@@ -1,10 +1,6 @@
 from app import app
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import numpy as np
 import io
 import base64
-
 
 from flask import (
     request,
@@ -20,8 +16,6 @@ from app.image_utils import ImageText
 
 import boto3
 from config import S3_BUCKET, S3_KEY, S3_SECRET
-
-s3 = boto3.client('s3', aws_access_key_id='AKIASDAIHF3AEIH6RTCF', aws_secret_access_key='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')
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 from logging import Formatter, FileHandler
@@ -61,7 +55,7 @@ def allowed_image_filesize(filesize):
         return False
 
 def resize_image(img):
-    basewidth = 600
+    basewidth = 1000
     wpercent = (basewidth / float(img.size[0]))
     hsize = int((float(img.size[1]) * float(wpercent)))
     return img.resize((basewidth, hsize), Image.ANTIALIAS)
@@ -71,29 +65,6 @@ def resize_image(img):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
-
-"""@app.context_processor
-def override_url_for():
-    return dict(url_for=dated_url_for)
-
-def dated_url_for(endpoint, **values):
-    if endpoint == 'js_static':
-        filename = values.get('filename', None)
-        if filename:
-            file_path = os.path.join(app.root_path,
-                                     'static/js', filename)
-            values['q'] = int(os.stat(file_path).st_mtime)
-    elif endpoint == 'css_static':
-        filename = values.get('filename', None)
-        if filename:
-            file_path = os.path.join(app.root_path,
-                                     'static/css', filename)
-            values['q'] = int(os.stat(file_path).st_mtime)
-    return url_for(endpoint, **values)
-"""
-"""@app.route('/css/<path:filename>')
-def css_static(filename):
-    return send_from_directory(app.root_path + '/static/css/', filename)"""
 
 @app.route('/js/<path:filename>')
 def js_static(filename):
@@ -115,35 +86,10 @@ def upldfile():
         filename = secure_filename(files.filename)
 
         app.logger.info('FileName: ' + filename)
-        print('FileName: ' + filename)
-        """s3_resource = boto3.resource('s3')
-        my_bucket = s3_resource.Bucket('satoshismemes')
-        my_bucket.Object(filename).put(Body=filename)
-"""
-
         #newObject = my_bucket.Object(filename)
         file_stream = io.BytesIO(files.read())
         #files.download_fileobj(file_stream)
-
-
-
-
-
-        """updir = app.config["IMAGE_UPLOADS"]
-        files.save(os.path.join(updir, filename))
-        file_size = os.path.getsize(os.path.join(updir, filename))
-        file_path = '/'.join(['upload', filename])
-        memefile_path = '/'.join(['memes', filename +'.png'])"""
-
-
-
         meme = Image.open(file_stream)
-
-
-
-
-        """meme = Image.open(os.path.join(app.config["IMAGE_UPLOADS"], filename))"""
-
         resizedMeme = resize_image(meme)
 
 
@@ -185,9 +131,8 @@ def upldfile():
         combined.save(saved_meme, 'png')
         imgByteArr = saved_meme.getvalue()
         #combined.show()
-        #print(type(imgByteArr))
+
         x =base64.b64encode(imgByteArr).decode('utf8')
-        #print(type(x))
 
         """s3_resource = boto3.resource('s3')
         my_bucket = s3_resource.Bucket('satoshismemes')
@@ -199,13 +144,3 @@ def upldfile():
         #return jsonify(name=filename, path=file_path, size=file_size, caption = caption, tag = tag, meme=memefile_path)
         return jsonify(byte=x)
 
-""""@app.after_request
-def add_header(r):
-
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
-
-"""
