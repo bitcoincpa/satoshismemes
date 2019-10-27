@@ -84,11 +84,8 @@ def upldfile():
         print(topbottom)
         #if files and allowed_file(files.filename):
         filename = secure_filename(files.filename)
-
         app.logger.info('FileName: ' + filename)
-        #newObject = my_bucket.Object(filename)
         file_stream = io.BytesIO(files.read())
-        #files.download_fileobj(file_stream)
         meme = Image.open(file_stream)
         resizedMeme = resize_image(meme)
 
@@ -105,7 +102,7 @@ def upldfile():
         meme.write_text_box((40, -30), caption, box_width=width, font_filename=app.config["MEME_FONT"],
                             font_size=height // int(fontsize), color='black')
 
-        # w,h = meme.get_text_size(font,height//12,caption)
+
 
         img2 = meme.get_image()
 
@@ -120,9 +117,7 @@ def upldfile():
         x = int(leftright)
         y = (wy - 100) - height*int(topbottom) + 100*int(topbottom)
 
-        #y = ((height)+(height // 3) - 40)
-        #print(y)
-        #y = (int(height) / int(topbottom)) + 50
+
         draw.text((x, y), tag, fill=(255, 255, 255, 90), font=tagfont)
 
         combined = Image.alpha_composite(bi, txt)
