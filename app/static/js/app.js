@@ -13,13 +13,13 @@ $('#submit').click(function() {
         console.log(textStatus);
         console.log(jqXHR);
         console.log('Success!');
-        $("#resultFilename").text(data['name']); // name of the file
-        $("#resultFilesize").text(data['size']); // size of the file
-        $("#resultCaption").text(data['caption']); // name of the file
-        $("#resultTag").text(data['tag']); // size of the file
+        //$("#resultFilename").text(data['name']); // name of the file
+        //$("#resultFilesize").text(data['size']); // size of the file
+        //$("#resultCaption").text(data['caption']); // name of the file
+        //$("#resultTag").text(data['tag']); // size of the file
         //my_url = "{{ url_for('upload', filename="+data['name']+" }}";
-        $("#img").attr('src', '/static/'+data['path']);
-        $("#meme").attr('src', '/static/'+data['meme']);
+        //$("#img").attr('src', '/static/'+data['path']);
+        //$("#meme").attr('src', '/static/'+data['meme']);
         $('#ItemPreview').attr('src', 'data:image/png;base64,' + data['byte']);
         //$("#image").attr('src', data['path']); // setting the src attribute of img tag
         $("#adv-btn").attr('value', data['name']);
