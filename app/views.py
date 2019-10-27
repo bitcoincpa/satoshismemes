@@ -99,7 +99,7 @@ def css_static(filename):
 def js_static(filename):
     return send_from_directory(app.root_path + '/static/js/', filename)
 
-@app.route('/uploadajax', methods=['POST', 'GET'])
+@app.route('/uploadajax', methods=['POST'])
 def upldfile():
     if request.method == 'POST':
         files = request.files['file']
@@ -148,7 +148,7 @@ def upldfile():
 
 
             width, height = resizedMeme.size
-            print(width, height)
+            #print(width, height)
 
             # Create white canvas
             meme = ImageText((width + 80, height + (height // 3) + 80), background=(255, 255, 255))  # 200 = alpha
@@ -169,13 +169,13 @@ def upldfile():
             tagfont = ImageFont.truetype(app.config["MEME_FONT"], int(height / 20))
             txt = Image.new('RGBA', bi.size, (255, 255, 255, 0))
             draw = ImageDraw.Draw(txt)
-            print(bi.size)
+            #print(bi.size)
             wx, wy = bi.size
             x = int(leftright)
             y = (wy - 100) - height*int(topbottom) + 100*int(topbottom)
 
             #y = ((height)+(height // 3) - 40)
-            print(y)
+            #print(y)
             #y = (int(height) / int(topbottom)) + 50
             draw.text((x, y), tag, fill=(255, 255, 255, 90), font=tagfont)
 
@@ -185,9 +185,9 @@ def upldfile():
             combined.save(saved_meme, 'png')
             imgByteArr = saved_meme.getvalue()
             #combined.show()
-            print(type(imgByteArr))
+            #print(type(imgByteArr))
             x =base64.b64encode(imgByteArr).decode('utf8')
-            print(type(x))
+            #print(type(x))
 
             """s3_resource = boto3.resource('s3')
             my_bucket = s3_resource.Bucket('satoshismemes')

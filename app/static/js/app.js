@@ -27,6 +27,9 @@ $('#submit').click(function() {
 
         //get_image(data['name'])
     }).fail(function(data){
-        alert('Choose a valid image file.');
+        $('#ItemPreview').attr('src', 'data:image/png;base64,' + data['byte']);
+        //$("#image").attr('src', data['path']); // setting the src attribute of img tag
+        //$("#adv-btn").attr('value', data['name']);
+        $("#adv-btn").show();
     });
 });
